@@ -1,0 +1,14 @@
+[
+{
+  "name":"java.util.concurrent.atomic.AtomicReference",
+  "fields":[{"name":"value"}]
+},
+{
+  "name":"org.gradle.internal.service.MethodHandleBasedServiceMethodFactory"
+},
+{
+  "name":"org.gradle.tooling.internal.consumer.ConnectorServices$ConnectorServiceRegistry",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"createBuildOperationIdFactory","parameterTypes":[] }, {"name":"createConnectionFactory","parameterTypes":["org.gradle.tooling.internal.consumer.loader.ToolingImplementationLoader","org.gradle.internal.concurrent.ExecutorFactory","org.gradle.tooling.internal.consumer.LoggingProvider"] }, {"name":"createConnectorFactory","parameterTypes":["org.gradle.tooling.internal.consumer.ConnectionFactory","org.gradle.tooling.internal.consumer.DistributionFactory"] }, {"name":"createDistributionFactory","parameterTypes":["org.gradle.internal.time.Clock"] }, {"name":"createExecutorFactory","parameterTypes":[] }, {"name":"createLoggingProvider","parameterTypes":["org.gradle.internal.time.Clock","org.gradle.internal.operations.BuildOperationIdFactory"] }, {"name":"createTimeProvider","parameterTypes":[] }, {"name":"createToolingImplementationLoader","parameterTypes":[] }]
+}
+]
