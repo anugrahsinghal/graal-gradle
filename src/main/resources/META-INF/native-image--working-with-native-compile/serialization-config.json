@@ -1,7 +1,16 @@
 {
   "types":[
     {
+      "name":"DefaultDependenciesModel"
+    },
+    {
       "name":"byte[]"
+    },
+    {
+      "name":"com.google.common.collect.ImmutableList$SerializedForm"
+    },
+    {
+      "name":"java.io.File"
     },
     {
       "name":"java.lang.Enum"
@@ -11,6 +20,9 @@
     },
     {
       "name":"java.lang.Number"
+    },
+    {
+      "name":"java.lang.Object[]"
     },
     {
       "name":"java.lang.RuntimeException"
@@ -31,7 +43,13 @@
       "name":"java.net.URL"
     },
     {
+      "name":"java.net.URL[]"
+    },
+    {
       "name":"java.util.ArrayList"
+    },
+    {
+      "name":"java.util.Arrays$ArrayList"
     },
     {
       "name":"java.util.Collections$EmptyList"
@@ -43,22 +61,31 @@
       "name":"java.util.HashMap"
     },
     {
-      "name":"java.util.UUID"
+      "name":"java.util.HashSet"
     },
     {
-      "name":"java.util.concurrent.CopyOnWriteArrayList"
+      "name":"java.util.UUID"
     },
     {
       "name":"org.gradle.api.GradleException"
     },
     {
-      "name":"org.gradle.api.InvalidUserCodeException"
+      "name":"org.gradle.api.InvalidUserDataException"
     },
     {
-      "name":"org.gradle.execution.MultipleBuildFailures"
+      "name":"org.gradle.execution.BaseSelectionException"
+    },
+    {
+      "name":"org.gradle.execution.TaskSelectionException"
+    },
+    {
+      "name":"org.gradle.internal.classloader.CachingClassLoader$Spec"
     },
     {
       "name":"org.gradle.internal.classloader.ClassLoaderSpec"
+    },
+    {
+      "name":"org.gradle.internal.classloader.FilteringClassLoader$Spec"
     },
     {
       "name":"org.gradle.internal.classloader.SystemClassLoaderSpec"
@@ -68,9 +95,6 @@
     },
     {
       "name":"org.gradle.internal.exceptions.ContextAwareException"
-    },
-    {
-      "name":"org.gradle.internal.exceptions.DefaultMultiCauseException"
     },
     {
       "name":"org.gradle.internal.exceptions.LocationAwareException"
@@ -89,6 +113,24 @@
     },
     {
       "name":"org.gradle.internal.serialize.TopLevelExceptionPlaceholder"
+    },
+    {
+      "name":"org.gradle.plugins.ide.internal.tooling.model.DefaultGradleProject"
+    },
+    {
+      "name":"org.gradle.plugins.ide.internal.tooling.model.DefaultGradleScript"
+    },
+    {
+      "name":"org.gradle.plugins.ide.internal.tooling.model.LaunchableGradleProjectTask"
+    },
+    {
+      "name":"org.gradle.plugins.ide.internal.tooling.model.LaunchableGradleTask"
+    },
+    {
+      "name":"org.gradle.tooling.internal.gradle.DefaultBuildIdentifier"
+    },
+    {
+      "name":"org.gradle.tooling.internal.gradle.DefaultProjectIdentifier"
     },
     {
       "name":"org.gradle.tooling.internal.provider.serialization.ClassLoaderDetails"

@@ -1,38 +1,33 @@
 [
 {
-  "name":"[B"
+  "name":"[Ljava.lang.Object;"
 },
 {
-  "name":"[Ljava.lang.StackTraceElement;"
+  "name":"[Ljava.net.URL;"
 },
 {
-  "name":"java.lang.Enum"
+  "name":"com.google.common.collect.ImmutableList$SerializedForm"
 },
 {
-  "name":"java.lang.Exception"
+  "name":"java.io.File"
+},
+{
+  "name":"java.io.Serializable",
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }]
 },
 {
   "name":"java.lang.Number"
 },
 {
   "name":"java.lang.Object",
-  "methods":[{"name":"equals","parameterTypes":["java.lang.Object"] }, {"name":"getArguments","parameterTypes":[] }, {"name":"getBuildLogLevel","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getConsumerVersion","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"hashCode","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }]
-},
-{
-  "name":"java.lang.RuntimeException"
+  "methods":[{"name":"equals","parameterTypes":["java.lang.Object"] }, {"name":"getArguments","parameterTypes":[] }, {"name":"getBuildLogLevel","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getChildren","parameterTypes":[] }, {"name":"getConsumerVersion","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"hashCode","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }]
 },
 {
   "name":"java.lang.Short"
 },
 {
-  "name":"java.lang.StackTraceElement"
-},
-{
   "name":"java.lang.Thread",
   "fields":[{"name":"threadLocalRandomProbe"}]
-},
-{
-  "name":"java.lang.Throwable"
 },
 {
   "name":"java.lang.invoke.MethodHandle"
@@ -47,19 +42,13 @@
   "name":"java.util.ArrayList"
 },
 {
-  "name":"java.util.Collections$EmptyList"
-},
-{
-  "name":"java.util.Collections$SingletonList"
+  "name":"java.util.Arrays$ArrayList"
 },
 {
   "name":"java.util.HashMap"
 },
 {
   "name":"java.util.UUID"
-},
-{
-  "name":"java.util.concurrent.CopyOnWriteArrayList"
 },
 {
   "name":"java.util.concurrent.atomic.AtomicBoolean",
@@ -72,12 +61,6 @@
 {
   "name":"java.util.concurrent.atomic.Striped64",
   "fields":[{"name":"base"}, {"name":"cellsBusy"}]
-},
-{
-  "name":"org.gradle.api.GradleException"
-},
-{
-  "name":"org.gradle.api.InvalidUserCodeException"
 },
 {
   "name":"org.gradle.api.internal.artifacts.DependencyManagementGlobalScopeServices",
@@ -156,10 +139,6 @@
   "queryAllDeclaredMethods":true
 },
 {
-  "name":"org.gradle.api.tasks.TaskExecutionException",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
-},
-{
   "name":"org.gradle.buildinit.plugins.internal.action.InitBuiltInCommand",
   "queryAllDeclaredConstructors":true
 },
@@ -195,9 +174,6 @@
 {
   "name":"org.gradle.configurationcache.serialization.beans.BeanConstructors",
   "queryAllDeclaredConstructors":true
-},
-{
-  "name":"org.gradle.execution.MultipleBuildFailures"
 },
 {
   "name":"org.gradle.ide.xcode.internal.services.XcodeServices",
@@ -245,15 +221,6 @@
   "name":"org.gradle.internal.enterprise.test.impl.TestTaskPropertiesServices",
   "queryAllPublicConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
-},
-{
-  "name":"org.gradle.internal.exceptions.ContextAwareException"
-},
-{
-  "name":"org.gradle.internal.exceptions.DefaultMultiCauseException"
-},
-{
-  "name":"org.gradle.internal.exceptions.LocationAwareException"
 },
 {
   "name":"org.gradle.internal.file.StatStatistics$Collector",
@@ -345,21 +312,6 @@
   "name":"org.gradle.internal.scripts.DefaultScriptFileResolverListeners",
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.gradle.internal.event.ListenerManager"] }]
-},
-{
-  "name":"org.gradle.internal.serialize.ExceptionPlaceholder"
-},
-{
-  "name":"org.gradle.internal.serialize.NestedExceptionPlaceholder"
-},
-{
-  "name":"org.gradle.internal.serialize.NestedExceptionPlaceholder$Kind"
-},
-{
-  "name":"org.gradle.internal.serialize.StackTraceElementPlaceholder"
-},
-{
-  "name":"org.gradle.internal.serialize.TopLevelExceptionPlaceholder"
 },
 {
   "name":"org.gradle.internal.service.MethodHandleBasedServiceMethodFactory",
@@ -549,6 +501,19 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"org.gradle.plugins.ide.internal.tooling.model.DefaultGradleProject",
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }]
+},
+{
+  "name":"org.gradle.plugins.ide.internal.tooling.model.DefaultGradleScript"
+},
+{
+  "name":"org.gradle.plugins.ide.internal.tooling.model.LaunchableGradleProjectTask"
+},
+{
+  "name":"org.gradle.plugins.ide.internal.tooling.model.LaunchableGradleTask"
+},
+{
   "name":"org.gradle.problems.internal.services.ProblemsGlobalServices",
   "queryAllDeclaredMethods":true
 },
@@ -580,12 +545,20 @@
   "methods":[{"name":"getArguments","parameterTypes":[] }, {"name":"getBuildLogLevel","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":["java.util.Map"] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":["java.util.Map"] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }]
 },
 {
+  "name":"org.gradle.tooling.internal.gradle.DefaultBuildIdentifier"
+},
+{
+  "name":"org.gradle.tooling.internal.gradle.DefaultProjectIdentifier"
+},
+{
   "name":"org.gradle.tooling.internal.gradle.GradleBuildIdentity",
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }]
 },
 {
   "name":"org.gradle.tooling.internal.gradle.GradleProjectIdentity",
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }]
 },
 {
   "name":"org.gradle.tooling.internal.protocol.BuildParameters",
@@ -655,6 +628,58 @@
 },
 {
   "name":"org.gradle.tooling.internal.provider.serialization.WellKnownClassLoaderRegistry$KnownClassLoaderSpec"
+},
+{
+  "name":"org.gradle.tooling.model.BuildIdentifier",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.BuildableElement",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.DomainObjectSet",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Element",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.GradleProject",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.GradleTask",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.HierarchicalElement",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Launchable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Model",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.ProjectIdentifier",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.ProjectModel",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Task",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.gradle.GradleScript",
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"org.gradle.vcs.internal.services.VersionControlServices",

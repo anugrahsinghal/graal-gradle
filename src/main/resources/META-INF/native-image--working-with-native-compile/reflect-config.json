@@ -1,9 +1,54 @@
 [
 {
+  "name":"ConfigurationDependenciesModel",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"projectPluginMap","parameterTypes":[] }, {"name":"projectToExternalDependencyPaths","parameterTypes":[] }, {"name":"projectToInternalDependencies","parameterTypes":[] }]
+},
+{
+  "name":"DefaultDependenciesModel",
+  "methods":[{"name":"projectPluginMap","parameterTypes":[] }, {"name":"projectToExternalDependencyPaths","parameterTypes":[] }, {"name":"projectToInternalDependencies","parameterTypes":[] }]
+},
+{
   "name":"[B"
 },
 {
+  "name":"[Ljava.lang.Object;"
+},
+{
   "name":"[Ljava.lang.StackTraceElement;"
+},
+{
+  "name":"[Ljava.net.URL;"
+},
+{
+  "name":"com.google.common.collect.ImmutableList$SerializedForm"
+},
+{
+  "condition":{"typeReachable":"com.ibm.icu.text.Collator"},
+  "name":"com.ibm.icu.text.Collator",
+  "methods":[{"name":"getAvailableLocales","parameterTypes":[] }, {"name":"getInstance","parameterTypes":["java.util.Locale"] }, {"name":"setStrength","parameterTypes":["int"] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.tools.Server"},
+  "name":"java.awt.Desktop",
+  "methods":[{"name":"browse","parameterTypes":["java.net.URI"] }, {"name":"getDesktop","parameterTypes":[] }, {"name":"isDesktopSupported","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"java.awt.SystemTray"},
+  "name":"java.awt.SystemTray",
+  "methods":[{"name":"add","parameterTypes":["java.awt.TrayIcon"] }, {"name":"getSystemTray","parameterTypes":[] }, {"name":"getTrayIconSize","parameterTypes":[] }, {"name":"isSupported","parameterTypes":[] }, {"name":"remove","parameterTypes":["java.awt.TrayIcon"] }]
+},
+{
+  "condition":{"typeReachable":"java.awt.SystemTray"},
+  "name":"java.awt.TrayIcon",
+  "methods":[{"name":"<init>","parameterTypes":["java.awt.Image","java.lang.String"] }, {"name":"addMouseListener","parameterTypes":["java.awt.event.MouseListener"] }]
+},
+{
+  "name":"java.io.File"
+},
+{
+  "name":"java.io.Serializable",
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getGroup","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }, {"name":"projectPluginMap","parameterTypes":[] }, {"name":"projectToExternalDependencyPaths","parameterTypes":[] }, {"name":"projectToInternalDependencies","parameterTypes":[] }]
 },
 {
   "name":"java.lang.Enum"
@@ -16,7 +61,7 @@
 },
 {
   "name":"java.lang.Object",
-  "methods":[{"name":"equals","parameterTypes":["java.lang.Object"] }, {"name":"getArguments","parameterTypes":[] }, {"name":"getBuildLogLevel","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getConsumerVersion","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"hashCode","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }]
+  "methods":[{"name":"equals","parameterTypes":["java.lang.Object"] }, {"name":"getArguments","parameterTypes":[] }, {"name":"getBuildLogLevel","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getChildren","parameterTypes":[] }, {"name":"getConsumerVersion","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getGroup","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"hashCode","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }, {"name":"projectPluginMap","parameterTypes":[] }, {"name":"projectToExternalDependencyPaths","parameterTypes":[] }, {"name":"projectToInternalDependencies","parameterTypes":[] }]
 },
 {
   "name":"java.lang.RuntimeException"
@@ -38,6 +83,11 @@
   "name":"java.lang.invoke.MethodHandle"
 },
 {
+  "condition":{"typeReachable":"org.h2.util.MathUtils"},
+  "name":"java.net.InetAddress",
+  "methods":[{"name":"getAddress","parameterTypes":[] }, {"name":"getAllByName","parameterTypes":["java.lang.String"] }, {"name":"getHostName","parameterTypes":[] }, {"name":"getLocalHost","parameterTypes":[] }]
+},
+{
   "name":"java.net.URL"
 },
 {
@@ -45,6 +95,9 @@
 },
 {
   "name":"java.util.ArrayList"
+},
+{
+  "name":"java.util.Arrays$ArrayList"
 },
 {
   "name":"java.util.Collections$EmptyList"
@@ -56,10 +109,10 @@
   "name":"java.util.HashMap"
 },
 {
-  "name":"java.util.UUID"
+  "name":"java.util.HashSet"
 },
 {
-  "name":"java.util.concurrent.CopyOnWriteArrayList"
+  "name":"java.util.UUID"
 },
 {
   "name":"java.util.concurrent.atomic.AtomicBoolean",
@@ -74,10 +127,14 @@
   "fields":[{"name":"base"}, {"name":"cellsBusy"}]
 },
 {
+  "name":"org.gradle.TaskExecutionRequest",
+  "methods":[{"name":"getGroup","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }]
+},
+{
   "name":"org.gradle.api.GradleException"
 },
 {
-  "name":"org.gradle.api.InvalidUserCodeException"
+  "name":"org.gradle.api.InvalidUserDataException"
 },
 {
   "name":"org.gradle.api.internal.artifacts.DependencyManagementGlobalScopeServices",
@@ -156,10 +213,6 @@
   "queryAllDeclaredMethods":true
 },
 {
-  "name":"org.gradle.api.tasks.TaskExecutionException",
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
-},
-{
   "name":"org.gradle.buildinit.plugins.internal.action.InitBuiltInCommand",
   "queryAllDeclaredConstructors":true
 },
@@ -197,7 +250,10 @@
   "queryAllDeclaredConstructors":true
 },
 {
-  "name":"org.gradle.execution.MultipleBuildFailures"
+  "name":"org.gradle.execution.BaseSelectionException"
+},
+{
+  "name":"org.gradle.execution.TaskSelectionException"
 },
 {
   "name":"org.gradle.ide.xcode.internal.services.XcodeServices",
@@ -228,7 +284,13 @@
   "queryAllDeclaredConstructors":true
 },
 {
+  "name":"org.gradle.internal.classloader.CachingClassLoader$Spec"
+},
+{
   "name":"org.gradle.internal.classloader.ClassLoaderSpec"
+},
+{
+  "name":"org.gradle.internal.classloader.FilteringClassLoader$Spec"
 },
 {
   "name":"org.gradle.internal.classloader.SystemClassLoaderSpec"
@@ -250,14 +312,16 @@
   "name":"org.gradle.internal.exceptions.ContextAwareException"
 },
 {
-  "name":"org.gradle.internal.exceptions.DefaultMultiCauseException"
-},
-{
   "name":"org.gradle.internal.exceptions.LocationAwareException"
 },
 {
   "name":"org.gradle.internal.file.StatStatistics$Collector",
   "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider",
+  "queryAllPublicConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -549,6 +613,21 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"org.gradle.plugins.ide.internal.tooling.model.DefaultGradleProject",
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }]
+},
+{
+  "name":"org.gradle.plugins.ide.internal.tooling.model.DefaultGradleScript"
+},
+{
+  "name":"org.gradle.plugins.ide.internal.tooling.model.LaunchableGradleProjectTask",
+  "methods":[{"name":"getProject","parameterTypes":[] }]
+},
+{
+  "name":"org.gradle.plugins.ide.internal.tooling.model.LaunchableGradleTask",
+  "methods":[{"name":"getGroup","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }]
+},
+{
   "name":"org.gradle.problems.internal.services.ProblemsGlobalServices",
   "queryAllDeclaredMethods":true
 },
@@ -580,12 +659,20 @@
   "methods":[{"name":"getArguments","parameterTypes":[] }, {"name":"getBuildLogLevel","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":["java.util.Map"] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":["java.util.Map"] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }]
 },
 {
+  "name":"org.gradle.tooling.internal.gradle.DefaultBuildIdentifier"
+},
+{
+  "name":"org.gradle.tooling.internal.gradle.DefaultProjectIdentifier"
+},
+{
   "name":"org.gradle.tooling.internal.gradle.GradleBuildIdentity",
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getGroup","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }]
 },
 {
   "name":"org.gradle.tooling.internal.gradle.GradleProjectIdentity",
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getChildren","parameterTypes":[] }, {"name":"getGroup","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }, {"name":"getProjectDirectory","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }]
 },
 {
   "name":"org.gradle.tooling.internal.protocol.BuildParameters",
@@ -601,12 +688,13 @@
 },
 {
   "name":"org.gradle.tooling.internal.protocol.InternalLaunchable",
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getGroup","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }]
 },
 {
   "name":"org.gradle.tooling.internal.protocol.InternalProtocolInterface",
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"getArguments","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getConsumerVersion","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }]
+  "methods":[{"name":"getArguments","parameterTypes":[] }, {"name":"getBuildProgressListener","parameterTypes":[] }, {"name":"getConsumerVersion","parameterTypes":[] }, {"name":"getDaemonBaseDir","parameterTypes":[] }, {"name":"getDaemonMaxIdleTimeValue","parameterTypes":[] }, {"name":"getEnvironmentVariables","parameterTypes":[] }, {"name":"getGradleUserHomeDir","parameterTypes":[] }, {"name":"getGroup","parameterTypes":[] }, {"name":"getInjectedPluginClasspath","parameterTypes":[] }, {"name":"getJavaHome","parameterTypes":[] }, {"name":"getJvmArguments","parameterTypes":[] }, {"name":"getLaunchables","parameterTypes":[] }, {"name":"getPath","parameterTypes":[] }, {"name":"getProgressListener","parameterTypes":[] }, {"name":"getProject","parameterTypes":[] }, {"name":"getProjectDir","parameterTypes":[] }, {"name":"getStandardError","parameterTypes":[] }, {"name":"getStandardInput","parameterTypes":[] }, {"name":"getStandardOutput","parameterTypes":[] }, {"name":"getStartTime","parameterTypes":[] }, {"name":"getSystemProperties","parameterTypes":[] }, {"name":"getTasks","parameterTypes":[] }, {"name":"getVerboseLogging","parameterTypes":[] }, {"name":"isColorOutput","parameterTypes":[] }, {"name":"isEmbedded","parameterTypes":[] }]
 },
 {
   "name":"org.gradle.tooling.internal.protocol.ProgressListenerVersion1",
@@ -657,6 +745,58 @@
   "name":"org.gradle.tooling.internal.provider.serialization.WellKnownClassLoaderRegistry$KnownClassLoaderSpec"
 },
 {
+  "name":"org.gradle.tooling.model.BuildIdentifier",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.BuildableElement",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.DomainObjectSet",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Element",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.GradleProject",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.GradleTask",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.HierarchicalElement",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Launchable",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Model",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.ProjectIdentifier",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.ProjectModel",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.Task",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.gradle.tooling.model.gradle.GradleScript",
+  "queryAllDeclaredMethods":true
+},
+{
   "name":"org.gradle.vcs.internal.services.VersionControlServices",
   "queryAllPublicConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
@@ -665,6 +805,132 @@
   "name":"org.gradle.workers.internal.WorkersServices",
   "queryAllPublicConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.engine.Database"},
+  "name":"org.h2.fulltext.FullText",
+  "methods":[{"name":"createIndex","parameterTypes":["java.sql.Connection","java.lang.String","java.lang.String","java.lang.String"] }, {"name":"dropAll","parameterTypes":["java.sql.Connection"] }, {"name":"dropIndex","parameterTypes":["java.sql.Connection","java.lang.String","java.lang.String"] }, {"name":"init","parameterTypes":["java.sql.Connection"] }, {"name":"reindex","parameterTypes":["java.sql.Connection"] }, {"name":"search","parameterTypes":["java.sql.Connection","java.lang.String","int","int"] }, {"name":"searchData","parameterTypes":["java.sql.Connection","java.lang.String","int","int"] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.fulltext.FullText"},
+  "name":"org.h2.fulltext.FullText$FullTextTrigger",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.engine.Database"},
+  "name":"org.h2.fulltext.FullTextLucene",
+  "methods":[{"name":"createIndex","parameterTypes":["java.sql.Connection","java.lang.String","java.lang.String","java.lang.String"] }, {"name":"dropAll","parameterTypes":["java.sql.Connection"] }, {"name":"dropIndex","parameterTypes":["java.sql.Connection","java.lang.String","java.lang.String"] }, {"name":"init","parameterTypes":["java.sql.Connection"] }, {"name":"reindex","parameterTypes":["java.sql.Connection"] }, {"name":"search","parameterTypes":["java.sql.Connection","java.lang.String","int","int"] }, {"name":"searchData","parameterTypes":["java.sql.Connection","java.lang.String","int","int"] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.fulltext.FullTextLucene"},
+  "name":"org.h2.fulltext.FullTextLucene$FullTextTrigger",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.slf4j.Logger"},
+  "name":"org.h2.message.TraceWriterAdapter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.db.LobStorageMap$BlobMeta$Type",
+  "fields":[{"name":"INSTANCE"}]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.db.LobStorageMap$BlobReference$Type",
+  "fields":[{"name":"INSTANCE"}]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.db.NullValueDataType",
+  "fields":[{"name":"INSTANCE"}]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.db.RowDataType$Factory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.tx.VersionedValueType$Factory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.type.ByteArrayDataType",
+  "fields":[{"name":"INSTANCE"}]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.type.LongDataType",
+  "fields":[{"name":"INSTANCE"}]
+},
+{
+  "condition":{"typeReachable":"org.h2.mvstore.type.MetaType"},
+  "name":"org.h2.mvstore.type.StringDataType",
+  "fields":[{"name":"INSTANCE"}]
+},
+{
+  "condition":{"typeReachable":"org.h2.server.TcpServer"},
+  "name":"org.h2.server.TcpServer",
+  "methods":[{"name":"stopServer","parameterTypes":["int","java.lang.String","int"] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.async.FilePathAsync",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.mem.FilePathMem",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.mem.FilePathMemLZF",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.niomapped.FilePathNioMapped",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.niomem.FilePathNioMem",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.niomem.FilePathNioMemLZF",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.retry.FilePathRetryOnInterrupt",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.split.FilePathSplit",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.store.fs.FilePath"},
+  "name":"org.h2.store.fs.zip.FilePathZip",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"java.awt.SystemTray"},
+  "name":"org.h2.tools.GUIConsole",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "condition":{"typeReachable":"org.h2.util.MemoryUnmapper"},
+  "name":"sun.misc.Unsafe",
+  "fields":[{"name":"theUnsafe"}],
+  "methods":[{"name":"invokeCleaner","parameterTypes":["java.nio.ByteBuffer"] }]
 },
 {
   "name":"sun.security.provider.MD5",

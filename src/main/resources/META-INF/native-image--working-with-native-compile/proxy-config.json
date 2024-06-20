@@ -1,5 +1,8 @@
 [
   {
+    "interfaces":["ConfigurationDependenciesModel"]
+  },
+  {
     "interfaces":["org.gradle.internal.logging.events.OutputEventListener"]
   },
   {
@@ -19,5 +22,11 @@
   },
   {
     "interfaces":["org.gradle.tooling.internal.provider.connection.ProviderOperationParameters"]
+  },
+  {
+    "interfaces":["org.gradle.tooling.model.GradleProject"]
+  },
+  {
+    "interfaces":["org.gradle.tooling.model.GradleTask"]
   }
 ]

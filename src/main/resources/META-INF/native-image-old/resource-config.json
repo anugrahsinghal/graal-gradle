@@ -1,12 +1,6 @@
 {
   "resources":{
   "includes":[{
-    "pattern":"\\QMETA-INF/services/java.lang.System$LoggerFinder\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/java.nio.channels.spi.SelectorProvider\\E"
-  }, {
-    "pattern":"\\QMETA-INF/services/java.time.zone.ZoneRulesProvider\\E"
-  }, {
     "pattern":"\\QMETA-INF/services/org.gradle.initialization.GradleApiSpecProvider\\E"
   }, {
     "pattern":"\\QMETA-INF/services/org.gradle.internal.service.scopes.PluginServiceRegistry\\E"

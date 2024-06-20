@@ -19,5 +19,8 @@
   },
   {
     "interfaces":["org.gradle.tooling.internal.provider.connection.ProviderOperationParameters"]
+  },
+  {
+    "interfaces":["org.gradle.tooling.model.GradleProject"]
   }
 ]

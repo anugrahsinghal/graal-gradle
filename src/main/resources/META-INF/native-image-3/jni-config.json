@@ -1,6 +1,6 @@
 [
 {
-  "name":"bug.BugKt",
+  "name":"JBug",
   "methods":[{"name":"main","parameterTypes":["java.lang.String[]"] }]
 },
 {
