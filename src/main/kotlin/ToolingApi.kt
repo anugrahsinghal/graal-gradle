@@ -34,6 +34,7 @@ class ToolingApi {
 
     fun findAllProjects(projectLocation: String): Collection<GradleProject> {
         val connection = GradleConnector.newConnector()
+            .useInstallation(File("/Users/anugrah.singhal/.gradle/wrapper/dists/gradle-8.7-bin/bhs2wmbdwecv87pi65oeuq5iu/gradle-8.7"))
             .forProjectDirectory(File(projectLocation))
             .connect()
 

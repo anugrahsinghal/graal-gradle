@@ -12,6 +12,9 @@
     "interfaces":["org.gradle.launcher.daemon.client.DaemonStartListener"]
   },
   {
+    "interfaces":["org.gradle.process.internal.ExecHandleListener"]
+  },
+  {
     "interfaces":["org.gradle.tooling.ProgressListener"]
   },
   {
@@ -19,5 +22,8 @@
   },
   {
     "interfaces":["org.gradle.tooling.internal.provider.connection.ProviderOperationParameters"]
+  },
+  {
+    "interfaces":["org.gradle.tooling.model.GradleProject"]
   }
 ]

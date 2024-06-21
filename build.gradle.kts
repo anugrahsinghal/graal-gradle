@@ -1,12 +1,15 @@
-import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
-import org.jetbrains.kotlin.cli.jvm.main
 import kotlin.concurrent.thread
+
+tasks.register("getHomeDir") {
+    println("Gradle home dir: ${gradle.gradleHomeDir}")
+}
 
 plugins {
     kotlin("jvm") version "2.0.0-RC1"
 //    id("org.graalvm.buildtools.native") version "0.10.1"
     application
     `java-gradle-plugin`
+//    `java-library`
     id("org.graalvm.buildtools.native") version "0.10.2"
 }
 
@@ -25,16 +28,20 @@ java {
     }
 }
 dependencies {
-    implementation("org.gradle:gradle-tooling-api:8.7")
+    implementation(gradleApi())
 }
 
 val MAIN_CLASS = "bug.BugKt"
 graalvmNative {
+    toolchainDetection = true
 //    binaries.all {
 //        resources.autodetect()
 //    }
     binaries.configureEach {
         resources.autodetect()
+        sharedLibrary = false
+//        useFatJar = true
+//        resources.autodetect()
         javaLauncher =
             javaToolchains.launcherFor {
                 languageVersion = JavaLanguageVersion.of(javaVersion)
@@ -46,7 +53,7 @@ graalvmNative {
             imageName = "myapp"
 //            mainClass = 'com.example.MainClass'
         }
-//        buildArgs("-H:+BuildReport") // not available in 17 probably
+        buildArgs("-H:+BuildReport") // not available in 17 probably
 //        buildArgs("--trace-object-instantiation=org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider")
 //        buildArgs("--trace-class-initialization=org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider")
         // buildArgs("--trace-object-instantiation=org.gradle.internal.impldep.org.apache.sshd.common.config.keys.FilePasswordProvider")
@@ -63,7 +70,7 @@ graalvmNative {
         // buildArgs("-H:IncludeResources=\".*.xml|.*.conf\"")
         // buildArgs("-H:+ReportUnsupportedElementsAtRuntime")
         // buildArgs("-H:+ReportExceptionStackTraces")
-         buildArgs("-H:-AddAllFileSystemProviders")
+        buildArgs("-H:-AddAllFileSystemProviders")
         // buildArgs("-H:+TraceSecurityServices")
         buildArgs("--strict-image-heap")
 //        buildArgs("-H:+VerifyHeap")
@@ -81,7 +88,8 @@ graalvmNative {
 //        )
 //         buildArgs("--initialize-at-build-time=org.gradle.internal.impldep.org.bouncycastle")//,rg.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.FilePasswordProvider,org.gradle.internal.impldep.org.bouncycastle")
         // https://github.com/oracle/graal/issues/5134
-        buildArgs("--initialize-at-build-time=" +
+        buildArgs(
+            "--initialize-at-build-time=" +
 //        "org.gradle.internal.impldep.org.apache.sshd.client.SshClient," +
 //        "org.gradle.internal.impldep.org.apache.sshd.common.util.GenericUtils," +
 //        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.SftpClientFactory," +
@@ -90,9 +98,9 @@ graalvmNative {
 //        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystem," +
 //        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemClientSessionInitializer," +
 //        "org.gradle.internal.impldep.org.apache.sshd.client.config.keys," +
-        "org.gradle.internal.impldep.org.bouncycastle," +
+                    "org.gradle.internal.impldep.org.bouncycastle," +
 //                "org.gradle.internal.impldep.org.eclipse.jgit.internal.transport.sshd.PasswordProviderWrapper,"
-                "org.gradle.internal.impldep.net.i2p.crypto.eddsa.EdDSASecurityProvider,"
+                    "org.gradle.internal.impldep.net.i2p.crypto.eddsa.EdDSASecurityProvider"
 //            "org.gradle.internal.impldep.org.bouncycastle.crypto.prng.SP800SecureRandom"
 //                "org.gradle.internal.impldep.org.eclipse.jgit.transport.sshd.IdentityPasswordProvider"
 //                "org.gradle.internal.impldep.org.bouncycastle.jce.provider.BouncyCastleProvider," +
@@ -105,15 +113,16 @@ graalvmNative {
 //        "org.gradle.internal.impldep.org.apache.sshd.client.auth.password.UserAuthPasswordFactory"
         )
 //        buildArgs("--initialize-at-run-time=org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$Default,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$NonceAndIV,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyPairGeneratorSpi\$EC")
-        buildArgs("--initialize-at-run-time=" +
-                "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$Default," +
-                "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$NonceAndIV," +
-                "org.gradle.internal.impldep.org.bouncycastle.crypto.CryptoServicesRegistrar," +
+        buildArgs(
+            "--initialize-at-run-time=" +
+                    "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$Default," +
+                    "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$NonceAndIV," +
+                    "org.gradle.internal.impldep.org.bouncycastle.crypto.CryptoServicesRegistrar" +
 //                "org.gradle.internal.impldep.org.bouncycastle.crypto.prng.SP800SecureRandom," +
 //                "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.IESCipher," +
 //            "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.GMCipherSpi," +
 //                "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyPairGeneratorSpi\$EC"
-            ""
+                    ""
         )
 //        buildArgs("--initialize-at-run-time=java.nio.file.spi.FileSystemProvider")
 //        buildArgs("--initialize-at-run-time=org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$6,org.gradle.internal.impldep.org.apache.sshd.common.mac.BuiltinMacs\$2,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignature\$10")
@@ -131,7 +140,7 @@ tasks.register("traceMetadata") {
             ProcessBuilder(
 //                "/Users/${System.getProperty("user.name")}/.sdkman/candidates/java/17.0.9-graalce/bin/java",
                 "/Users/${System.getProperty("user.name")}/.sdkman/candidates/java/21.0.3-graal/bin/java",
-                "-agentlib:native-image-agent=config-output-dir=/Users/${System.getProperty("user.name")}/personal/graal-8760/src/main/resources/META-INF/native-image",
+                "-agentlib:native-image-agent=config-merge-dir=/Users/${System.getProperty("user.name")}/personal/graal-8760/src/main/resources/META-INF/native-image",
                 "-cp",
                 "build/libs/graal-8760.jar:build/install/graal-8760/lib/*",
                 MAIN_CLASS
@@ -151,6 +160,21 @@ tasks.register("traceMetadata") {
         }
     }
 }
+
+tasks.withType(Jar::class) {
+    manifest {
+        attributes["Manifest-Version"] = "1.0"
+        attributes["Main-Class"] = MAIN_CLASS
+        attributes["Dependencies"] =
+            configurations.compileClasspath.get().files.joinToString(" ") { it.canonicalPath }
+        attributes["Class-Path"] =
+            configurations.compileClasspath.get().files.joinToString(" ") { it.canonicalPath }
+//        doFirst {
+//            manifest.
+//        }
+    }
+}
+
 /*
 ~/personal/graal-8760 git:[master]
         ./gradlew nativeCompile
