@@ -1,16 +1,6 @@
 import org.gradle.tooling.GradleConnector
-import org.gradle.tooling.ProjectConnection
 import org.gradle.tooling.model.GradleProject
-import org.gradle.tooling.model.GradleTask
-import org.gradle.tooling.model.idea.*
 import java.io.*
-import java.net.URISyntaxException
-import java.nio.charset.Charset
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
-import java.util.*
-import java.util.jar.JarEntry
-import java.util.jar.JarFile
 
 class ToolingApi {
 
@@ -38,9 +28,21 @@ class ToolingApi {
             .forProjectDirectory(File(projectLocation))
             .connect()
 
-        val gradleProject = connection.use { it.getModel(GradleProject::class.java) }
+        val model = connection.model(GradleProject::class.java)
+//        model.withArguments("--debug")
+//        model.withArguments("-Dorg.gradle.debug=true")
+        val out = ByteArrayOutputStream()
+        val err = ByteArrayOutputStream()
+        model.withArguments("--info")
+            .setStandardOutput(out)
+            .setStandardError(err)
+
+        val gradleProject = model.get()
 
         val gradleProjects = gradleProject.children + gradleProject
+
+        println(out.toString("UTF-8"))
+        System.err.println(err.toString("UTF-8"))
 
         return gradleProjects
     }

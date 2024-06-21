@@ -9,7 +9,7 @@ plugins {
 //    id("org.graalvm.buildtools.native") version "0.10.1"
     application
     `java-gradle-plugin`
-//    `java-library`
+    `java-library`
     id("org.graalvm.buildtools.native") version "0.10.2"
 }
 
@@ -33,101 +33,76 @@ dependencies {
 
 val MAIN_CLASS = "bug.BugKt"
 graalvmNative {
+    useArgFile = false
     toolchainDetection = true
-//    binaries.all {
-//        resources.autodetect()
-//    }
-    binaries.configureEach {
-        resources.autodetect()
-        sharedLibrary = false
-//        useFatJar = true
-//        resources.autodetect()
-        javaLauncher =
-            javaToolchains.launcherFor {
-                languageVersion = JavaLanguageVersion.of(javaVersion)
-                // vendor = JvmVendorSpec.matching("Oracle Corporation")
+    agent {
+        defaultMode = "standard"
+        enabled = true
+        modes {
+            standard {
             }
+            conditional {
+                userCodeFilterPath.set("path-to-filter.json") // Path to a filter file that determines classes which will be used in the metadata conditions.
+                extraFilterPath.set("path-to-another-filter.json") // Optional, extra filter used to further filter the collected metadata.
+            }
+            // The direct agent mode allows users to directly pass options to the agent.
+            direct {
+                // {output_dir} is a special string expanded by the plugin to where the agent files would usually be output.
+                options.add("config-output-dir={output_dir}")
+                options.add("experimental-configuration-with-origins")
+            }
+        }
+//        callerFilterFiles.from("filter.json")
+//        accessFilterFiles.from("filter.json")
+        builtinCallerFilter.set(true)
+        builtinHeuristicFilter.set(true)
+//        enableExperimentalPredefinedClasses.set(false)
+//        enableExperimentalUnsafeAllocationTracing.set(false)
+        trackReflectionMetadata.set(true)
 
-        if (name == "main") {
+        metadataCopy {
+            inputTaskNames.add("test") // Tasks previously executed with the agent attached.
+            outputDirectories.add("src/main/resources/META-INF/native-image/") // Replace <groupId> and <artifactId> with GAV coordinates of your project
+            mergeWithExisting.set(true) // Instead of copying, merge with existing metadata in the output directories.
+        }
+
+    }
+    binaries {
+        named("main") {
             mainClass = MAIN_CLASS
             imageName = "myapp"
-//            mainClass = 'com.example.MainClass'
+            javaLauncher = javaToolchains.launcherFor {
+                languageVersion.set(JavaLanguageVersion.of(javaVersion))
+                // vendor = JvmVendorSpec.matching("Oracle Corporation")
+            }
+            richOutput = true
+//            useFatJar = true
         }
-        buildArgs("-H:+BuildReport") // not available in 17 probably
-//        buildArgs("--trace-object-instantiation=org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider")
-//        buildArgs("--trace-class-initialization=org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider")
-        // buildArgs("--trace-object-instantiation=org.gradle.internal.impldep.org.apache.sshd.common.config.keys.FilePasswordProvider")
-        // buildArgs("--trace-class-initialization=org.gradle.internal.impldep.org.apache.sshd.common.util.security.SecurityUtils,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$14,org.gradle.internal.impldep.org.apache.sshd.common.forward.DefaultForwarderFactory,org.gradle.internal.impldep.org.apache.sshd.common.util.NumberUtils,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$2,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.edec.KeyFactorySpi,org.gradle.internal.impldep.org.apache.sshd.client.config.hosts.HostConfigEntry\$LazyDefaultConfigFileHolder,org.gradle.internal.impldep.org.apache.sshd.client.session.ClientUserAuthServiceFactory,org.gradle.internal.impldep.org.apache.sshd.sftp.client.SftpErrorDataHandler,org.gradle.internal.impldep.org.apache.sshd.common.util.ReflectionUtils,org.gradle.internal.impldep.org.apache.sshd.common.mac.BuiltinMacs,org.gradle.internal.impldep.org.apache.sshd.client.session.ClientConnectionServiceFactory\$1,org.gradle.internal.impldep.org.apache.sshd.common.keyprovider.AbstractKeyPairProvider,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$5,org.gradle.internal.impldep.org.apache.sshd.sftp.client.SftpVersionSelector,org.gradle.internal.impldep.org.apache.sshd.common.mac.BuiltinMacs\$1,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.BuiltinIdentities,org.gradle.internal.impldep.org.apache.sshd.common.PropertyResolverUtils,org.slf4j.LoggerFactory,org.gradle.internal.impldep.org.apache.sshd.client.config.keys.ClientIdentitiesWatcher,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$4,org.gradle.internal.impldep.org.apache.sshd.common.compression.BuiltinCompressions\$3,org.gradle.internal.impldep.org.bouncycastle.asn1.isara.IsaraObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.PublicKeyEntry,org.gradle.internal.impldep.org.apache.sshd.client.auth.pubkey.UserAuthPublicKeyFactory,org.slf4j.impl.StaticLoggerBinder,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$13,org.gradle.internal.impldep.org.bouncycastle.asn1.rosstandart.RosstandartObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.session.helpers.AbstractConnectionServiceRequestHandler,org.gradle.internal.impldep.org.apache.sshd.common.util.security.SecurityProviderRegistrar,org.gradle.internal.impldep.org.apache.sshd.common.compression.BuiltinCompressions,org.gradle.internal.impldep.org.apache.sshd.client.config.hosts.ConfigFileHostEntryResolver,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.edec.KeyFactorySpi\$Ed25519,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$18,org.gradle.internal.impldep.org.apache.sshd.common.digest.BuiltinDigests,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.dsa.DSAUtil,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.edec.KeyFactorySpi\$X25519,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$10,org.gradle.internal.impldep.org.bouncycastle.asn1.iso.ISOIECObjectIdentifiers,org.gradle.internal.impldep.org.bouncycastle.jce.provider.BouncyCastleProvider,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$1,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$15,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$11,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.edec.KeyFactorySpi\$Ed448,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$3,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.ED25519BufferPublicKeyParser,org.gradle.internal.impldep.org.apache.sshd.common.io.BuiltinIoServiceFactoryFactories,org.gradle.internal.time.MonotonicClock,org.gradle.internal.impldep.org.bouncycastle.pqc.asn1.PQCObjectIdentifiers,org.gradle.internal.impldep.org.bouncycastle.crypto.CryptoServicesRegistrar,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$1,org.gradle.internal.impldep.org.apache.sshd.common.forward.DefaultForwarderFactory\$1,org.gradle.internal.impldep.org.apache.sshd.client.config.keys.ClientIdentityFileWatcher,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$7,org.gradle.internal.impldep.org.apache.sshd.common.compression.BuiltinCompressions\$2,org.gradle.internal.impldep.org.bouncycastle.asn1.cryptopro.CryptoProObjectIdentifiers,org.gradle.internal.impldep.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.util.security.bouncycastle.BouncyCastleRandomFactory,org.gradle.internal.impldep.org.apache.sshd.common.util.io.PathUtils\$LazyDefaultUserHomeFolderHolder,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$12,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG,org.gradle.internal.impldep.org.apache.sshd.client.config.keys.DefaultClientIdentitiesWatcher,org.gradle.internal.impldep.org.apache.sshd.server.forward.TcpForwardingFilter\$Type,org.gradle.internal.impldep.org.apache.sshd.common.NamedResource,org.gradle.internal.impldep.org.bouncycastle.asn1.ua.UAObjectIdentifiers,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.COMPOSITE,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.BuiltinIdentities\$1,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers,org.gradle.internal.impldep.org.apache.sshd.common.mac.BuiltinMacs\$2,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.DSSBufferPublicKeyParser,org.gradle.internal.impldep.org.bouncycastle.asn1.teletrust.TeleTrusTObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.session.helpers.DefaultUnknownChannelReferenceHandler,org.gradle.internal.impldep.org.apache.sshd.client.config.hosts.HostPatternsHolder,org.gradle.internal.impldep.org.apache.sshd.common.global.AbstractOpenSshHostKeysHandler,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.ECBufferPublicKeyParser,org.gradle.internal.logging.slf4j.OutputEventListenerBackedLoggerContext,org.gradle.internal.impldep.org.bouncycastle.asn1.sec.SECObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.kex.extension.DefaultClientKexExtensionHandler,org.gradle.internal.impldep.org.bouncycastle.util.Properties,org.gradle.internal.impldep.org.apache.sshd.server.forward.RejectAllForwardingFilter,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$6,org.gradle.internal.impldep.org.apache.sshd.common.session.ConnectionServiceRequestHandler,org.gradle.internal.impldep.org.apache.sshd.common.cipher.ECCurves,org.gradle.internal.impldep.org.apache.sshd.client.config.keys.BuiltinClientIdentitiesWatcher,org.gradle.internal.impldep.org.apache.sshd.common.keyprovider.KeyPairProvider,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$13,org.gradle.internal.impldep.org.apache.sshd.common.io.DefaultIoServiceFactoryFactory,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.BufferPublicKeyParser,org.gradle.internal.impldep.org.apache.sshd.common.file.nativefs.NativeFileSystemFactory,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$15,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$1,org.gradle.internal.impldep.org.bouncycastle.asn1.bc.BCObjectIdentifiers,org.gradle.internal.impldep.org.bouncycastle.jce.provider.BouncyCastleProviderConfiguration,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.PublicKeyEntry\$LazyDefaultKeysFolderHolder,org.gradle.internal.impldep.org.apache.sshd.common.util.io.ModifiableFileWatcher,org.gradle.internal.impldep.org.apache.sshd.common.io.DefaultIoServiceFactoryFactory\$LazyDefaultIoServiceFactoryFactoryHolder,org.gradle.internal.impldep.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.client.config.keys.ClientIdentity,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.SkECBufferPublicKeyParser,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$11,org.gradle.internal.impldep.org.apache.sshd.client.global.OpenSshHostKeysHandler,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.OpenSSHCertPublicKeyParser,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.edec.KeyFactorySpi\$X448,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$5,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$4,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$5,org.gradle.internal.impldep.org.bouncycastle.asn1.x509.X509ObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$6,org.gradle.internal.impldep.org.apache.sshd.client.ClientBuilder,org.gradle.internal.impldep.org.apache.sshd.common.compression.BuiltinCompressions\$1,org.gradle.internal.time.Time,org.gradle.internal.impldep.org.bouncycastle.util.Strings,org.gradle.internal.impldep.org.apache.sshd.common.util.EventListenerUtils,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$9,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$2,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$2,org.gradle.internal.impldep.org.apache.sshd.common.keyprovider.KeyPairProvider\$1,org.gradle.internal.impldep.org.apache.sshd.common.SyspropsMapWrapper,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.symmetric.AES,org.gradle.internal.impldep.org.bouncycastle.asn1.nist.NISTObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.client.auth.AuthenticationIdentitiesProvider,org.gradle.internal.impldep.org.bouncycastle.crypto.engines.RSABlindedEngine,org.gradle.internal.impldep.org.apache.sshd.client.keyverifier.AcceptAllServerKeyVerifier,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$6,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.SkED25519BufferPublicKeyParser,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$14,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures,org.gradle.internal.impldep.org.bouncycastle.asn1.gm.GMObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.util.io.PathUtils,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$16,org.gradle.internal.impldep.org.apache.sshd.server.forward.ForwardedTcpipFactory,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$8,org.gradle.internal.impldep.org.bouncycastle.asn1.gnu.GNUObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.client.SshClient,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.BuiltinIdentities\$2,org.gradle.internal.impldep.org.apache.sshd.client.auth.pubkey.UserAuthPublicKeyFactory\$1,org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.bouncycastle.asn1.edec.EdECObjectIdentifiers,org.gradle.internal.impldep.org.bouncycastle.asn1.x9.X9ObjectIdentifiers,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$12,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$3,org.gradle.internal.impldep.org.apache.sshd.common.util.threads.ThreadUtils,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$8,org.gradle.internal.impldep.org.apache.sshd.client.config.hosts.HostConfigEntry,org.gradle.internal.impldep.org.apache.sshd.common.kex.MontgomeryCurve,org.gradle.internal.impldep.org.apache.sshd.client.auth.password.UserAuthPasswordFactory,org.gradle.internal.impldep.org.apache.sshd.common.util.GenericUtils,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories,org.gradle.internal.impldep.org.apache.sshd.common.util.MapEntryUtils,org.gradle.internal.impldep.org.apache.sshd.common.util.buffer.keys.RSABufferPublicKeyParser,org.gradle.internal.impldep.org.apache.sshd.client.auth.keyboard.UserAuthKeyboardInteractiveFactory,org.gradle.internal.impldep.org.apache.sshd.common.util.io.IoUtils,org.gradle.internal.impldep.org.apache.sshd.client.session.ClientConnectionServiceFactory,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$10,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$3,org.gradle.internal.impldep.org.apache.sshd.common.mac.BuiltinMacs\$3,org.gradle.internal.impldep.org.apache.sshd.common.kex.BuiltinDHFactories\$7,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$17,org.gradle.internal.impldep.org.apache.sshd.common.util.OsUtils,org.gradle.internal.impldep.org.apache.sshd.client.config.hosts.DefaultConfigFileHostEntryResolver,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignatures\$9,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$4,org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider")
-//        buildArgs("-H:+ReportExceptionStackTraces")
-//        buildArgs("-H:+PrintClassInitialization")
-//        buildArgs("--verbose")
-//        buildArgs("--initialize-at-run-time=org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.FilePasswordProvider")
-        // buildArgs("--trace-object-instantiation=java.security.SecureRandom,org.gradle.internal.impldep.org.eclipse.jgit.internal.transport.sshd.PasswordProviderWrapper,org.gradle.internal.impldep.org.apache.sshd.client.session.ClientUserAuthServiceFactory,org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider,org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider")
-        // buildArgs("--trace-class-initialization=org.gradle.internal.impldep.org.eclipse.jgit.internal.transport.sshd.PasswordProviderWrapper,org.gradle.internal.impldep.org.apache.sshd.client.session.ClientUserAuthServiceFactory,org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider,org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$6,org.gradle.internal.impldep.org.apache.sshd.common.mac.BuiltinMacs\$2,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignature\$10,org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.FilePasswordProvider")
-        // buildArgs("-H:TraceClassInitialization=true")
-        // buildArgs("-H:+PrintClassInitialization")
-        buildArgs("--report-unsupported-elements-at-runtime")
-        // buildArgs("-H:IncludeResources=\".*.xml|.*.conf\"")
-        // buildArgs("-H:+ReportUnsupportedElementsAtRuntime")
-        // buildArgs("-H:+ReportExceptionStackTraces")
-        buildArgs("-H:-AddAllFileSystemProviders")
-        // buildArgs("-H:+TraceSecurityServices")
-        buildArgs("--strict-image-heap")
-//        buildArgs("-H:+VerifyHeap")
-//        buildArgs("-H:AdditionalSecurityServiceTypes")
-        // buildArgs("--enable-all-security-services")
-//        buildArgs("-H:AdditionalSecurityProviders=" +
-//                "org.gradle.internal.impldep.org.bouncycastle.jce.provider.BouncyCastleProvider," +
-//                "org.gradle.internal.impldep.org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider"
-//        )
+        all {
+            excludeConfig.put("", listOf(""))
+            resources.autodetect()
+            sharedLibrary = false
+            buildArgs("--verbose")
+            buildArgs("-H:+BuildReport") // not available in 17 probably
+            buildArgs("--report-unsupported-elements-at-runtime")
+            // buildArgs("-H:IncludeResources=\".*.xml|.*.conf\"")
+            buildArgs("-H:-AddAllFileSystemProviders")
+            buildArgs("--strict-image-heap")
+            buildArgs(
+                "--initialize-at-build-time=" +
+                        "org.gradle.internal.impldep.org.bouncycastle," +
+                        "org.gradle.internal.impldep.net.i2p.crypto.eddsa.EdDSASecurityProvider"
+            )
+            buildArgs(
+                "--initialize-at-run-time=" +
+                        "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$Default," +
+                        "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$NonceAndIV," +
+                        "org.gradle.internal.impldep.org.bouncycastle.crypto.CryptoServicesRegistrar"
+            )
+        }
 
-//        buildArgs("--strict-image-heap")
-//                 buildArgs("--initialize-at-build-time=org.gradle.internal.impldep.org.bouncycastle,")//,rg.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.FilePasswordProvider,org.gradle.internal.impldep.org.bouncycastle")
-//        buildArgs("--initialize-at-run-time=" +
-//                "org.gradle.internal.impldep.org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider,"
-//        )
-//         buildArgs("--initialize-at-build-time=org.gradle.internal.impldep.org.bouncycastle")//,rg.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemProvider,org.gradle.internal.impldep.org.apache.sshd.common.config.keys.FilePasswordProvider,org.gradle.internal.impldep.org.bouncycastle")
-        // https://github.com/oracle/graal/issues/5134
-        buildArgs(
-            "--initialize-at-build-time=" +
-//        "org.gradle.internal.impldep.org.apache.sshd.client.SshClient," +
-//        "org.gradle.internal.impldep.org.apache.sshd.common.util.GenericUtils," +
-//        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.SftpClientFactory," +
-//        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.SftpErrorDataHandler," +
-//        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.SftpVersionSelector," +
-//        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystem," +
-//        "org.gradle.internal.impldep.org.apache.sshd.sftp.client.fs.SftpFileSystemClientSessionInitializer," +
-//        "org.gradle.internal.impldep.org.apache.sshd.client.config.keys," +
-                    "org.gradle.internal.impldep.org.bouncycastle," +
-//                "org.gradle.internal.impldep.org.eclipse.jgit.internal.transport.sshd.PasswordProviderWrapper,"
-                    "org.gradle.internal.impldep.net.i2p.crypto.eddsa.EdDSASecurityProvider"
-//            "org.gradle.internal.impldep.org.bouncycastle.crypto.prng.SP800SecureRandom"
-//                "org.gradle.internal.impldep.org.eclipse.jgit.transport.sshd.IdentityPasswordProvider"
-//                "org.gradle.internal.impldep.org.bouncycastle.jce.provider.BouncyCastleProvider," +
-//        "org.gradle.internal.impldep.org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider"
-//        "org.gradle.internal.impldep.org.eclipse.jgit.internal.transport.sshd.PasswordProviderWrapper," +
-//        "org.gradle.internal.impldep.org.apache.sshd.client.session.ClientUserAuthServiceFactory," +
-//        "org.gradle.internal.impldep.org.apache.sshd.client.session.ClientConnectionServiceFactory$1," +
-//        "org.gradle.internal.impldep.org.apache.sshd.client.auth.pubkey.UserAuthPublicKeyFactory$1," +
-//        "org.gradle.internal.impldep.org.apache.sshd.client.auth.keyboard.UserAuthKeyboardInteractiveFactory," +
-//        "org.gradle.internal.impldep.org.apache.sshd.client.auth.password.UserAuthPasswordFactory"
-        )
-//        buildArgs("--initialize-at-run-time=org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$Default,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$NonceAndIV,org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyPairGeneratorSpi\$EC")
-        buildArgs(
-            "--initialize-at-run-time=" +
-                    "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$Default," +
-                    "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.drbg.DRBG\$NonceAndIV," +
-                    "org.gradle.internal.impldep.org.bouncycastle.crypto.CryptoServicesRegistrar" +
-//                "org.gradle.internal.impldep.org.bouncycastle.crypto.prng.SP800SecureRandom," +
-//                "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.IESCipher," +
-//            "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.GMCipherSpi," +
-//                "org.gradle.internal.impldep.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyPairGeneratorSpi\$EC"
-                    ""
-        )
-//        buildArgs("--initialize-at-run-time=java.nio.file.spi.FileSystemProvider")
-//        buildArgs("--initialize-at-run-time=org.gradle.internal.impldep.org.apache.sshd.common.BaseBuilder,org.gradle.internal.impldep.org.apache.sshd.common.cipher.BuiltinCiphers\$6,org.gradle.internal.impldep.org.apache.sshd.common.mac.BuiltinMacs\$2,org.gradle.internal.impldep.org.apache.sshd.common.signature.BuiltinSignature\$10")
-        // when using v21 of graal, compilation fails
     }
+
 }
 application {
     mainClass = MAIN_CLASS
@@ -160,20 +135,28 @@ tasks.register("traceMetadata") {
         }
     }
 }
+//tasks.named("",Jar::class) {
+//
+//}
 
 tasks.withType(Jar::class) {
-    manifest {
-        attributes["Manifest-Version"] = "1.0"
-        attributes["Main-Class"] = MAIN_CLASS
-        attributes["Dependencies"] =
-            configurations.compileClasspath.get().files.joinToString(" ") { it.canonicalPath }
-        attributes["Class-Path"] =
-            configurations.compileClasspath.get().files.joinToString(" ") { it.canonicalPath }
-//        doFirst {
-//            manifest.
-//        }
-    }
+//    from("collectReachabilityMetadata")
+    exclude("**/META-INF/*.SF")
+    exclude("**/META-INF/*.DSA")
+    exclude("**/META-INF/*.RSA")
 }
+//    manifest {
+//        attributes["Manifest-Version"] = "1.0"
+//        attributes["Main-Class"] = MAIN_CLASS
+//        attributes["Dependencies"] =
+//            configurations.compileClasspath.get().files.joinToString(" ") { it.canonicalPath }
+//        attributes["Class-Path"] =
+//            configurations.compileClasspath.get().files.joinToString(" ") { it.canonicalPath }
+////        doFirst {
+////            manifest.
+////        }
+//    }
+//}
 
 /*
 ~/personal/graal-8760 git:[master]
